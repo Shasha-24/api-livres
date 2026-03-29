@@ -10,14 +10,14 @@ use Illuminate\Validation\Rule;
 
 class LivreController extends Controller
 {
-    // GET /api/v1/livres → liste tous les livres
+
     public function index(): JsonResponse
     {
         $livres = Livre::with('exemplaires')->paginate(15);
         return response()->json($livres);
     }
 
-    // POST /api/v1/livres → créer un livre
+
     public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([
@@ -36,14 +36,14 @@ class LivreController extends Controller
         ], 201);
     }
 
-    // GET /api/v1/livres/{id} → voir un livre
+
     public function show(Livre $livre): JsonResponse
     {
         $livre->load('exemplaires');
         return response()->json(['data' => $livre]);
     }
 
-    // PUT /api/v1/livres/{id} → modifier un livre
+
     public function update(Request $request, Livre $livre): JsonResponse
     {
         $validated = $request->validate([
@@ -63,14 +63,14 @@ class LivreController extends Controller
         ]);
     }
 
-    // DELETE /api/v1/livres/{id} → supprimer un livre
+
     public function destroy(Livre $livre): JsonResponse
     {
         $livre->delete();
         return response()->json(['message' => 'Livre supprimé avec succès.']);
     }
 
-    // GET /api/v1/livres/{id}/exemplaires → exemplaires d'un livre
+
     public function exemplaires(Livre $livre): JsonResponse
     {
         return response()->json(['data' => $livre->exemplaires]);

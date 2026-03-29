@@ -19,7 +19,7 @@ class Livre extends Model
         'description',
     ];
 
-    // Un livre a plusieurs exemplaires
+
     public function exemplaires()
     {
         return $this->hasMany(Exemplaire::class);

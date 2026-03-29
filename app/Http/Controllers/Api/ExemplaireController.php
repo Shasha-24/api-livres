@@ -10,14 +10,14 @@ use Illuminate\Validation\Rule;
 
 class ExemplaireController extends Controller
 {
-    // GET /api/v1/exemplaires → liste tous les exemplaires
+
     public function index(): JsonResponse
     {
         $exemplaires = Exemplaire::with('livre')->paginate(15);
         return response()->json($exemplaires);
     }
 
-    // POST /api/v1/exemplaires → créer un exemplaire
+
     public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([
@@ -36,14 +36,14 @@ class ExemplaireController extends Controller
         ], 201);
     }
 
-    // GET /api/v1/exemplaires/{id} → voir un exemplaire
+
     public function show(Exemplaire $exemplaire): JsonResponse
     {
         $exemplaire->load('livre');
         return response()->json(['data' => $exemplaire]);
     }
 
-    // PUT /api/v1/exemplaires/{id} → modifier un exemplaire
+
     public function update(Request $request, Exemplaire $exemplaire): JsonResponse
     {
         $validated = $request->validate([
@@ -61,14 +61,14 @@ class ExemplaireController extends Controller
         ]);
     }
 
-    // DELETE /api/v1/exemplaires/{id} → supprimer un exemplaire
+
     public function destroy(Exemplaire $exemplaire): JsonResponse
     {
         $exemplaire->delete();
         return response()->json(['message' => 'Exemplaire supprimé avec succès.']);
     }
 
-    // PATCH /api/v1/exemplaires/{id}/statut → changer le statut
+
     public function changerStatut(Request $request, Exemplaire $exemplaire): JsonResponse
     {
         $validated = $request->validate([
